@@ -1,0 +1,51 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "local-llm-mcp"
+version = "0.1.0"
+description = "MCP server per Claude Code che delega compiti ripetitivi e a basso rischio a modelli self-hosted con API OpenAI-compatible"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+dependencies = [
+    "fastmcp>=3.4,<4",
+    "httpx>=0.28",
+    "jsonschema>=4.23",
+    "pydantic>=2.8",
+    "python-dotenv>=1.0",
+]
+
+[project.scripts]
+local-llm-mcp = "local_llm_mcp.server:main"
+local-llm-dashboard = "local_llm_mcp.dashboard:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.2",
+    "pytest-asyncio>=0.24",
+    "ruff>=0.6",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/local_llm_mcp"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "S"]
+# E501: le righe le gestisce `ruff format`; restano lunghe solo alcune stringhe di descrizione.
+ignore = ["S101", "E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S105", "S106"]
+# Le query SQL sono composte solo da costanti del modulo; i valori passano sempre come parametri.
+"src/local_llm_mcp/calllog.py" = ["S608"]

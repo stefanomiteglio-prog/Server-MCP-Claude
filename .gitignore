@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Ambienti virtuali
+.venv/
+venv/
+
+# Segreti e configurazione locale (si versiona solo l'esempio)
+.env
+.env.*
+*.env
+!.env.example
+
+# File locali: diff per la review, test reali, registro delle chiamate
+.local/
+*.db
+*.sqlite
+*.sqlite3
+*.log
+
+# Cache di strumenti
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Editor e sistema operativo
+.idea/
+.vscode/
+*.code-workspace
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Impostazioni locali di Claude Code
+.claude/

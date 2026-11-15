@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "local-llm": {
+      "type": "stdio",
+      "command": "uv",
+      "args": ["run", "--quiet", "local-llm-mcp"]
+    }
+  }
+}
